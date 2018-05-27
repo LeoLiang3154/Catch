@@ -3,11 +3,21 @@
 buildscript {
     
     repositories {
+        mavenCentral()
         google()
         jcenter()
+
+        maven { url "http://dl.bintray.com/jfrog/jfrog-jars" }
+        maven { url 'https://maven.fabric.io/public' } // io.fabric.API for Material Pager View
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
+
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:+'
+        classpath 'io.fabric.tools:gradle:1.+'  // Material Pager View
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -15,10 +25,23 @@ buildscript {
     }
 }
 
+ext {
+    minSdk = 14
+    sdk = 27
+    buildTools = "26.0.2"
+    supportVersion = "27.1.0"
+    libraryVersion = '1.2.3'
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
+
+        maven { url "http://dl.bintray.com/florent37/maven" }
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://maven.google.com" }  // Material Pager View
+
     }
 }
 
