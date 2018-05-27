@@ -57,6 +57,6 @@ public class DrawerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) ||
-            super.onOptionsItemSelected(item);
+                super.onOptionsItemSelected(item);
     }
 }

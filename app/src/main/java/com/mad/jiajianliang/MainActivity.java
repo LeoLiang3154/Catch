@@ -31,6 +31,8 @@ public class MainActivity extends DrawerActivity {
             setSupportActionBar(toolbar);
         }
 
+        initialiseData();
+
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
             @Override
@@ -127,5 +129,11 @@ public class MainActivity extends DrawerActivity {
                 }
             });
         }
+    }
+
+    public void initialiseData()
+    {
+        Events events = new Events("Apple","Apple","Apple","Apple","Apple");
+        events.save();
     }
 }

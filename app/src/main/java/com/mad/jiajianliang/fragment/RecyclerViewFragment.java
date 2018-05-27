@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
+import com.mad.jiajianliang.EventAdapter;
+import com.mad.jiajianliang.Events;
 import com.mad.jiajianliang.R;
-import com.mad.jiajianliang.TestRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +46,10 @@ public class RecyclerViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        final List<Object> items = new ArrayList<>();
+        final List<Events> events = new ArrayList<>();
 
         for (int i = 0; i < ITEM_COUNT; ++i) {
-            items.add(new Object());
+            events.add(new Events("Grape","Grape", "Grape", "Grape", "Grape"));
         }
 
 
@@ -63,6 +64,6 @@ public class RecyclerViewFragment extends Fragment {
 
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new TestRecyclerViewAdapter(items));
+        mRecyclerView.setAdapter(new EventAdapter(events, getContext()));
     }
 }

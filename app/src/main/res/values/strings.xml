@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Catch!</string>
+    <string name="add_your_event_here">Add your event here</string>
+    <string name="here_is_event">Here is event</string>
 </resources>
