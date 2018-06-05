@@ -2,11 +2,13 @@ package com.mad.jiajianliang;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,26 +18,40 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     static final int TYPE_HEADER = 0;
     static final int TYPE_CELL = 1;
     private View view;
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
+    public static final String LOCATION = "location";
+    public static final String WEEKDAY = "weekday";
+    public static final String START_TIME = "startTime";
+    public static final String END_TIME = "endTime";
+    public static final String EVENT_ID = "eventId";
 
 
-    /**
-     * @param context
-     * @param events
-     */
-    public EventAdapter(List<Events> events,Context context) {
+    public EventAdapter(List<Events> events, Context context) {
         this.events = events;
         this.context = context;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView add;
+        TextView showTitle;
+        TextView showDescription;
+        TextView showLocation;
+        TextView showStartTime;
+        TextView showEndTime;
+        CardView edit;
 
-        public ViewHolder(View view, int viewType) {
+        ViewHolder(View view, int viewType) {
             super(view);
             if (viewType == 0) {
                 add = (CardView) view.findViewById(R.id.add_event_card_view);
             } else if (viewType == 1) {
-                //TODO
+                showTitle = (TextView) view.findViewById(R.id.showSmallTitle);
+                showDescription = (TextView) view.findViewById(R.id.showSmallDescription);
+                showLocation = (TextView) view.findViewById(R.id.showSmallLocation);
+                showStartTime = (TextView) view.findViewById(R.id.showSmallStartTime);
+                showEndTime = (TextView) view.findViewById(R.id.showSmallEndTime);
+                edit = (CardView) view.findViewById(R.id.edit);
             }
         }
     }
@@ -60,22 +76,59 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(EventAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final EventAdapter.ViewHolder holder, int position) {
+        final Events showEvent = events.get(position);
         switch (getItemViewType(position)) {
             case TYPE_HEADER:
-                holder.add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        Events book = Events.findById(Events.class, (long) 1);
-//                        String tem = book.title;
-//                        Toast.makeText(context, tem, Toast.LENGTH_SHORT).show();  //SugerORM
-                        Intent editEvent = new Intent (context, EditEvents.class);
-                        context.startActivity(editEvent);
-
-                    }
-                });
-                break;
+                    holder.add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent addEvent = new Intent(context, AddEvent.class);
+                            context.startActivity(addEvent);
+                        }
+                    });
+                    break;
             case TYPE_CELL:
+                try {
+                    holder.showTitle.setText(showEvent.title);
+                    holder.showDescription.setText(showEvent.description);
+                    holder.showLocation.setText(showEvent.location);
+                    holder.showStartTime.setText(showEvent.startTime);
+                    holder.showEndTime.setText(showEvent.endTime);
+
+                    holder.edit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent editEvent = new Intent(context, EditEvent.class);
+                            editEvent.putExtra(TITLE, showEvent.title);
+                            editEvent.putExtra(DESCRIPTION, showEvent.description);
+                            editEvent.putExtra(LOCATION, showEvent.location);
+                            editEvent.putExtra(WEEKDAY, showEvent.weekday);
+                            editEvent.putExtra(START_TIME, showEvent.startTime);
+                            editEvent.putExtra(END_TIME, showEvent.endTime);
+                            long eventID = showEvent.getId();
+                            editEvent.putExtra(EVENT_ID, eventID);
+                            context.startActivity(editEvent);
+                        }
+                    });
+
+                    holder.edit.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            // Create a Uri from an intent string. Use the result to create an Intent.
+                            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + showEvent.location);
+                            // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                            // Make the Intent explicit by setting the Google Maps package
+                            mapIntent.setPackage("com.google.android.apps.maps");
+                            // Attempt to start an activity that can handle the Intent
+                            context.startActivity(mapIntent);
+                            return true;
+                        }
+                    });
+                } catch (NullPointerException ex) {
+                    ex.printStackTrace();
+                }
                 break;
         }
     }
@@ -94,4 +147,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 return TYPE_CELL;
         }
     }
+
 }

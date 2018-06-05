@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.mad.jiajianliang">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.mad.jiajianliang">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.orm.SugarApp"
@@ -16,25 +16,28 @@
         tools:replace="android:icon">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="e6be07938a6770a529d3d522ad46f49be29dca32" /> <!-- Fabric API Key. -->
+            android:value="e6be07938a6770a529d3d522ad46f49be29dca32"/> <!-- Fabric API Key. -->
 
         <meta-data
             android:name="DATABASE"
-            android:value="events.db" />
+            android:value="EVENTS.db"/>
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="1"/>
         <!-- <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example" /> -->
 
-        <activity android:name=".EditEvents"></activity>
+        <activity android:name=".AddEvent"/>
+        <activity android:name=".EditEvent"/>
+        <activity android:name=".DailyWeather">
+        </activity>
     </application>
 
 </manifest>

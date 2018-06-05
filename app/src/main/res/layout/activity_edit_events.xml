@@ -4,99 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditEvents">
+    tools:context=".EditEvent"
+    >
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="106dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEndTime"
+        app:layout_constraintVertical_bias="1.0"
+        app:rippleColor="@android:color/white"
+        app:srcCompat="@drawable/button2" />
 
     <EditText
-        android:id="@+id/typeEditText"
+        android:id="@+id/addTitle"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="47dp"
-        android:ems="10"
-        android:hint="Type"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/weekdayEditText"
-        app:layout_constraintStart_toStartOf="@+id/descriptionEditText"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
-
-    <EditText
-        android:id="@+id/weekdayEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="41dp"
-        android:ems="10"
-        android:hint="Weekday"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/locationEditText"
-        app:layout_constraintStart_toStartOf="@+id/typeEditText"
-        app:layout_constraintTop_toBottomOf="@+id/typeEditText" />
-
-    <EditText
-        android:id="@+id/locationEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="34dp"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/addButton"
-        app:layout_constraintStart_toStartOf="@+id/weekdayEditText"
-        app:layout_constraintTop_toBottomOf="@+id/weekdayEditText" />
-
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/typeEditText"
-        app:layout_constraintStart_toStartOf="@+id/titleEditText"
-        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
-
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginTop="105dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="28dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Title"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionEditText"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <Button
-        android:id="@+id/addButton"
+
+    <EditText
+        android:id="@+id/addLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
-        android:text="add"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="31dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationEditText" />
+        app:layout_constraintBottom_toTopOf="@+id/daySpinner"
+        app:layout_constraintStart_toStartOf="@+id/addDescription"
+        app:layout_constraintTop_toBottomOf="@+id/addDescription" />
 
-    <Button
-        android:id="@+id/clearButton"
+    <EditText
+        android:id="@+id/addDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
-        android:text="ClearData"
+        android:layout_marginBottom="27dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
         android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/addLocation"
+        app:layout_constraintStart_toStartOf="@+id/addTitle"
+        app:layout_constraintTop_toBottomOf="@+id/addTitle" />
+
+    <EditText
+        android:id="@+id/addStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:hint="Start Time"
+        android:inputType="time"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/addEndTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daySpinner"
+        android:maxLength="4"
+        android:digits="1234567890"/>
+
+    <EditText
+        android:id="@+id/addEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:digits="1234567890"
+        android:ems="10"
+        android:hint="End Time"
+        android:inputType="time"
+        android:maxLength="4"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/addStartTime"
+        app:layout_constraintTop_toBottomOf="@+id/addStartTime" />
+
+    <Spinner
+        android:id="@+id/daySpinner"
+        android:layout_width="223dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="25dp"
+        android:entries="@array/weekday"
+        app:layout_constraintBottom_toTopOf="@+id/addStartTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addLocation" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/deleteButton"
+        android:layout_width="106dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEndTime"
+        app:layout_constraintVertical_bias="1.0"
+        app:rippleColor="@android:color/white"
+        app:srcCompat="@drawable/button1"
+        android:focusable="true" />
+
+
 </android.support.constraint.ConstraintLayout>

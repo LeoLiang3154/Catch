@@ -15,25 +15,27 @@ import com.mad.jiajianliang.EventAdapter;
 import com.mad.jiajianliang.Events;
 import com.mad.jiajianliang.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by florentchampigny on 24/04/15.
+ * Created by florentchampigny on 24/4/15.
  */
-public class RecyclerViewFragment extends Fragment {
+public class MonFragment extends Fragment {
 
+
+    List<Events> events = Events.find(Events.class, "weekday = ?", "Monday");
+//    List<Events> tueEvents = Events.listAll(Events.class);
+    long initialCount = Events.count(Events.class);
     private static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 100;
-
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    EventAdapter myMonEventAdapter;
 
-    public static RecyclerViewFragment newInstance() {
-        return new RecyclerViewFragment();
+    public static MonFragment newInstance() {
+        return new MonFragment();
     }
 
     @Override
@@ -46,13 +48,11 @@ public class RecyclerViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        final List<Events> events = new ArrayList<>();
-
-        for (int i = 0; i < ITEM_COUNT; ++i) {
-            events.add(new Events("Grape","Grape", "Grape", "Grape", "Grape"));
-        }
-
-
+        long ITEM_COUNT = Events.count(Events.class) +1 ;
+            for (int i = 0; i < ITEM_COUNT; i++) {
+                Events addEvent = Events.findById(Events.class, i);
+                events.add(addEvent);
+            }
         //setup materialviewpager
 
         if (GRID_LAYOUT) {
@@ -64,6 +64,20 @@ public class RecyclerViewFragment extends Fragment {
 
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new EventAdapter(events, getContext()));
+        myMonEventAdapter = new EventAdapter(events, getContext());
+        mRecyclerView.setAdapter(myMonEventAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        long newCount = Events.count(Events.class);
+
+        if (newCount > initialCount) {
+            Events myMonEvent = Events.last(Events.class);
+            events.add(myMonEvent);
+            myMonEventAdapter.notifyItemChanged((int) newCount);
+        }
+
     }
 }

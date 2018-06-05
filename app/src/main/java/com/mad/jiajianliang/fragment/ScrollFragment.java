@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by florentchampigny on 24/04/15.
+ * Created by florentchampigny on 24/4/15.
  */
 public class ScrollFragment extends Fragment {
 

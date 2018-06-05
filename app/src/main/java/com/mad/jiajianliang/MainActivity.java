@@ -1,23 +1,40 @@
 package com.mad.jiajianliang;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
-import com.mad.jiajianliang.fragment.RecyclerViewFragment;
+import com.mad.jiajianliang.fragment.FriFragment;
+import com.mad.jiajianliang.fragment.MonFragment;
+import com.mad.jiajianliang.fragment.SatFragment;
+import com.mad.jiajianliang.fragment.SunFragment;
+import com.mad.jiajianliang.fragment.ThurFragment;
+import com.mad.jiajianliang.fragment.TueFragment;
+import com.mad.jiajianliang.fragment.WedFragment;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends DrawerActivity {
+public class MainActivity extends DailyWeather implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
+    List<Events> monEvents;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +42,33 @@ public class MainActivity extends DrawerActivity {
         setContentView(R.layout.activity_main);
         setTitle("");
         ButterKnife.bind(this);
-
         final Toolbar toolbar = mViewPager.getToolbar();
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
-
-        initialiseData();
+        add();
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
             @Override
             public Fragment getItem(int position) {
                 switch (position % 7) {
-                    //case 0:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 2:
-                    //    return WebViewFragment.newInstance();
+                    case 0:
+                        return MonFragment.newInstance();
+                    case 1:
+                        return TueFragment.newInstance();
+                    case 2:
+                        return WedFragment.newInstance();
+                    case 3:
+                        return ThurFragment.newInstance();
+                    case 4:
+                        return FriFragment.newInstance();
+                    case 5:
+                        return SatFragment.newInstance();
+                    case 6:
+                        return SunFragment.newInstance();
                     default:
-                        return RecyclerViewFragment.newInstance();
+                        return new Fragment();
                 }
             }
 
@@ -82,32 +105,32 @@ public class MainActivity extends DrawerActivity {
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndUrl(
-                            R.color.green,
-                            "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/06/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
+                                R.color.green,
+                                "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
                     case 1:
                         return HeaderDesign.fromColorResAndUrl(
-                            R.color.blue,
-                            "http://www.hdiphonewallpapers.us/phone-wallpapers/540x960-1/540x960-mobile-wallpapers-hd-2218x5ox3.jpg");
+                                R.color.blue,
+                                "http://www.hdiphonewallpapers.us/phone-wallpapers/540x960-1/540x960-mobile-wallpapers-hd-2218x5ox3.jpg");
                     case 2:
                         return HeaderDesign.fromColorResAndUrl(
-                            R.color.cyan,
-                            "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                                R.color.cyan,
+                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
                     case 3:
                         return HeaderDesign.fromColorResAndUrl(
-                            R.color.red,
-                            "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                R.color.red,
+                                "http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg");
                     case 4:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.red,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                R.color.cyan,
+                                "http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg");
                     case 5:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.red,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                R.color.blue,
+                                "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
                     case 6:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.red,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                R.color.green,
+                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
                 }
 
                 //execute others actions if needed (ex : modify your header logo)
@@ -129,11 +152,69 @@ public class MainActivity extends DrawerActivity {
                 }
             });
         }
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void initialiseData()
-    {
-        Events events = new Events("Apple","Apple","Apple","Apple","Apple");
-        events.save();
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        if (id == R.id.nav_catch) {
+
+        } else if (id == R.id.nav_activity) {
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(MainActivity.this, DailyWeather.class));
+                    finish();
+                }
+            }, 500);
+
+        }
+
+
+        return true;
+    }
+
+    public void add() {
+//        Events event1 = new Events("Default","Default","Default","Default","Default","Monday");
+//        event1.save();
+//        Events event2 = new Events("Default","Default","Default","Default","Default","Tuesday");
+//        event2.save();
+//        Events event3 = new Events("Default","Default","Default","Default","Default","Wednesday");
+//        event3.save();
+//        Events event4 = new Events("Default","Default","Default","Default","Default","Thursday");
+//        event4.save();
+//        Events event5 = new Events("Default","Default","Default","Default","Default","Friday");
+//        event5.save();
+//        Events event6 = new Events("Default","Default","Default","Default","Default","Saturday");
+//        event6.save();
+//        Events event7 = new Events("Default","Default","Default","Default","Default","Sunday");
+//        event7.save();
     }
 }

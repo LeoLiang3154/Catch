@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEvent">
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="106dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEndTime"
+        app:layout_constraintVertical_bias="1.0"
+        app:rippleColor="@android:color/white"
+        app:srcCompat="@drawable/button2" />
+
+    <EditText
+        android:id="@+id/addTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="28dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <EditText
+        android:id="@+id/addLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="31dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/daySpinner"
+        app:layout_constraintStart_toStartOf="@+id/addDescription"
+        app:layout_constraintTop_toBottomOf="@+id/addDescription" />
+
+    <EditText
+        android:id="@+id/addDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/addLocation"
+        app:layout_constraintStart_toStartOf="@+id/addTitle"
+        app:layout_constraintTop_toBottomOf="@+id/addTitle" />
+
+    <EditText
+        android:id="@+id/addStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:digits="1234567890"
+        android:ems="10"
+        android:hint="Start Time"
+        android:inputType="time"
+        android:maxLength="4"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/addEndTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daySpinner" />
+
+    <EditText
+        android:id="@+id/addEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:digits="1234567890"
+        android:ems="10"
+        android:hint="End Time"
+        android:inputType="time"
+        android:maxLength="4"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/addStartTime"
+        app:layout_constraintTop_toBottomOf="@+id/addStartTime" />
+
+    <Spinner
+        android:id="@+id/daySpinner"
+        android:layout_width="223dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="25dp"
+        android:entries="@array/weekday"
+        app:layout_constraintBottom_toTopOf="@+id/addStartTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addLocation" />
+
+</android.support.constraint.ConstraintLayout>
