@@ -1,3 +1,26 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *These code refer to Github author florent37
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.mad.jiajianliang;
 
 import android.content.Intent;
@@ -29,13 +52,20 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends DailyWeather implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * The M view pager.
+     */
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
-    List<Events> monEvents;
 
-
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +80,12 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
+            /**
+             * return correct fragments according to current viewpager position
+             *
+             * @param position
+             * @return
+             */
             @Override
             public Fragment getItem(int position) {
                 switch (position % 7) {
@@ -77,6 +113,12 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
                 return 7;
             }
 
+            /**
+             * sets the titles for pages
+             *
+             * @param position
+             * @return
+             */
             @Override
             public CharSequence getPageTitle(int position) {
                 switch (position % 7) {
@@ -106,34 +148,32 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
                     case 0:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.green,
-                                "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
+                                getString(R.string.case_0_page));
                     case 1:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.blue,
-                                "http://www.hdiphonewallpapers.us/phone-wallpapers/540x960-1/540x960-mobile-wallpapers-hd-2218x5ox3.jpg");
+                                getString(R.string.case_1_page));
                     case 2:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.cyan,
-                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                                getString(R.string.case_2_page));
                     case 3:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.red,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg");
+                                getString(R.string.case_3_page));
                     case 4:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.cyan,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg");
+                                getString(R.string.case_4_page));
                     case 5:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.blue,
-                                "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
+                                getString(R.string.case_5_page));
                     case 6:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.green,
-                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                                getString(R.string.case_6_page));
                 }
-
-                //execute others actions if needed (ex : modify your header logo)
 
                 return null;
             }
@@ -148,7 +188,7 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
                 @Override
                 public void onClick(View v) {
                     mViewPager.notifyHeaderChanged();
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.cat_logo_click, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -164,6 +204,9 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * methods for drawer activity
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -178,7 +221,6 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -201,6 +243,11 @@ public class MainActivity extends DailyWeather implements NavigationView.OnNavig
         return true;
     }
 
+    /**
+     * add method for testing app
+     *
+     * Add.
+     */
     public void add() {
 //        Events event1 = new Events("Default","Default","Default","Default","Default","Monday");
 //        event1.save();

@@ -1,3 +1,25 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *These code refer to Youtube and Github author ynunez
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.mad.jiajianliang;
 
 import android.annotation.SuppressLint;
@@ -22,6 +44,9 @@ import com.mad.jiajianliang.data.Item;
 import com.mad.jiajianliang.service.WeatherServiceCallBack;
 import com.mad.jiajianliang.service.YahooWeatherService;
 
+/**
+ * The type Daily weather.
+ */
 public class DailyWeather extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, WeatherServiceCallBack {
 
     private ImageView weatherImageView;
@@ -32,6 +57,8 @@ public class DailyWeather extends AppCompatActivity implements NavigationView.On
     private YahooWeatherService service;
 
     private ProgressDialog progressDialog;
+    private final static String prefix= "@drawable/icon_";
+    private final static String city = "Sydney, Australia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +84,12 @@ public class DailyWeather extends AppCompatActivity implements NavigationView.On
 
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(getString(R.string.progressDialog_loading));
         progressDialog.show();
 
 
         service = new YahooWeatherService(this);
-        service.refreshWeather("Sydney, Australia");
+        service.refreshWeather(city);
 
 
     }
@@ -105,6 +132,11 @@ public class DailyWeather extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * if get weather service success, set text on view
+     *
+     * @param channel the channel
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void serviceSuccess(Channel channel) {
@@ -112,16 +144,21 @@ public class DailyWeather extends AppCompatActivity implements NavigationView.On
 
         Item item = channel.getItem();
 
-        int resourceId = getResources().getIdentifier("@drawable/icon_"+ item.getCondition().getCode(),null,getPackageName());
+        int resourceId = getResources().getIdentifier(prefix+ item.getCondition().getCode(),null,getPackageName());
         Drawable weatherIconDrawble = getResources().getDrawable(resourceId);
 
         weatherImageView.setImageDrawable(weatherIconDrawble);
 
         weatherLocation.setText(service.getLocation());
         weatherTem.setText(item.getCondition().getTemperature() + "\u00B0" + channel.getUnits().getTemperature());
-        weatherLocation.setText(service.getLocation());
+        weatherCondition.setText(item.getCondition().getDescription());
     }
 
+    /**
+     *shows exception message on Toast
+     *
+     * @param exception the exception
+     */
     @Override
     public void serviceFailure(Exception exception) {
         progressDialog.hide();

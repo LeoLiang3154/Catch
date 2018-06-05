@@ -1,3 +1,26 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *These code refer to Github author florent37
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.mad.jiajianliang;
 
 import android.content.Context;
@@ -32,6 +55,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         this.context = context;
     }
 
+    /**
+     * inner class fr EventAdapter to hold the components
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView add;
         TextView showTitle;
@@ -41,6 +67,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         TextView showEndTime;
         CardView edit;
 
+        /**
+         * Constructor  for both adapters
+         *
+         * @param view
+         * @param viewType
+         */
         ViewHolder(View view, int viewType) {
             super(view);
             if (viewType == 0) {
@@ -56,6 +88,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
+    /**
+     * return layout according to viewType
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public EventAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
@@ -75,6 +114,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return null;
     }
 
+    /**
+     * create view for adapters according to view type
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final EventAdapter.ViewHolder holder, int position) {
         final Events showEvent = events.get(position);
@@ -133,11 +178,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
+    /**
+     * get events counts
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return events.size();
     }
 
+    /**
+     * get types according to position
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         switch (position) {

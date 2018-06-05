@@ -44,7 +44,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="204dp"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
+                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal"
+                    android:layout_alignParentLeft="true" />
 
                 <TextView
                     android:id="@+id/weatherCondition"
@@ -53,7 +54,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="220dp"
-                    android:text="Cloudy"
+                    android:text="@string/sunny"
                     android:textSize="20sp" />
 
                 <TextView
@@ -61,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="21 C"
+                    android:text="@string/_21_c"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -72,7 +73,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="129dp"
-                    android:text="Sydney"
+                    android:text="@string/sydney"
                     android:textSize="36sp"
                     android:textStyle="bold" />
             </RelativeLayout>

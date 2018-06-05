@@ -22,4 +22,22 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="cat_logo_click">This is Catch!</string>
+    <string name="case_0_page">http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg</string>
+    <string name="case_1_page">http://www.hdiphonewallpapers.us/phone-wallpapers/540x960-1/540x960-mobile-wallpapers-hd-2218x5ox3.jpg</string>
+    <string name="case_2_page">http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg</string>
+    <string name="case_3_page">http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg</string>
+    <string name="case_4_page">http://www.tothemobile.com/wp-content/uploads/2014/7/original.jpg</string>
+    <string name="case_5_page">http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/6/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg</string>
+    <string name="case_6_page">http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg</string>
+    <string name="delete_error">Whoops, it seems go wrong, please call our programmer to fix this issue</string>
+    <string name="progressDialog_loading">Loading...</string>
+    <string name="title">Title</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="sydney">Sydney</string>
+    <string name="_21_c">21 C</string>
+    <string name="sunny">Sunny</string>
 </resources>

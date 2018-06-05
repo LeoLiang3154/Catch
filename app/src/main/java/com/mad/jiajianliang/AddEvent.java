@@ -1,3 +1,25 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.mad.jiajianliang;
 
 import android.support.design.widget.FloatingActionButton;
@@ -19,40 +41,41 @@ public class AddEvent extends AppCompatActivity {
     /**
      * The Add title.
      */
-    EditText addTitle; //initialise addTitle view components
+    EditText addTitle;
     /**
      * The Add description.
      */
-    EditText addDescription; //initialise addDescription view components
+    EditText addDescription;
     /**
      * The Add location.
      */
-    EditText addLocation; //initialise addLocation view components
+    EditText addLocation;
     /**
      * The Add start time.
      */
-    EditText addStartTime; //initialise addStartTime view components
+    EditText addStartTime;
     /**
      * The Add end time.
      */
-    EditText addEndTime; //initialise addEndTime view components
+    EditText addEndTime;
     /**
      * The Add weekday.
      */
-    Spinner addWeekday; //initialise addWeekday view components
+    Spinner addWeekday;
 
     /**
      * The Add button.
      */
-    FloatingActionButton addButton; //initialise addButton view components
+    FloatingActionButton addButton;
 
     /**
+     * onCreate called when addEvent activity start
+     *
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this,new Crashlytics()); //call Crashlytics API when this activity crash
         setContentView(R.layout.activity_add_event);
 
         addTitle = findViewById(R.id.addTitle); //register the components

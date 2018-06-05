@@ -1,3 +1,25 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.mad.jiajianliang;
 
 import android.content.Context;
@@ -16,25 +38,61 @@ import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
 
+/**
+ * The type Edit event.
+ */
 public class EditEvent extends AppCompatActivity {
 
+    /**
+     * The Add title.
+     */
     EditText addTitle;
+    /**
+     * The Add description.
+     */
     EditText addDescription;
+    /**
+     * The Add location.
+     */
     EditText addLocation;
+    /**
+     * The Add start time.
+     */
     EditText addStartTime;
+    /**
+     * The Add end time.
+     */
     EditText addEndTime;
+    /**
+     * The Add weekday.
+     */
     Spinner addWeekday;
+    /**
+     * The Event id.
+     */
     long eventId;
 
+    /**
+     * The Add button.
+     */
     FloatingActionButton addButton;
+    /**
+     * The Delete button.
+     */
     FloatingActionButton deleteButton;
 
+    /**
+     * The Context.
+     */
     Context context;
 
+    /**
+
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this,new Crashlytics());
         setContentView(R.layout.activity_edit_events);
 
         addTitle = findViewById(R.id.addTitle);
@@ -97,7 +155,7 @@ public class EditEvent extends AppCompatActivity {
                 }
                 catch(NullPointerException ex)
                 {
-                    Toast.makeText(context,"Whoops, it seems go wrong, please call our programmer to fix this issue", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.delete_error, Toast.LENGTH_SHORT).show();
                 }
             }
         });

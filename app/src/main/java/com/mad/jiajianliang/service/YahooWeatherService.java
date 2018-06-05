@@ -1,3 +1,26 @@
+/**
+ * *
+ *@author Jiajian Liang
+ *@version  1.0.0 foo
+ *
+ *These code refer to Youtube and Github author ynunez
+ *
+ * Copyright 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.mad.jiajianliang.service;
 
 import android.annotation.SuppressLint;
@@ -18,23 +41,47 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * The type Yahoo weather service.
+ */
 public class YahooWeatherService {
     private WeatherServiceCallBack callBack;
     private String location;
     private Exception exception;
 
+    /**
+     * Instantiates a new Yahoo weather service.
+     *
+     * @param callBack the call back
+     */
     public YahooWeatherService(WeatherServiceCallBack callBack) {
         this.callBack = callBack;
     }
 
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Refreshes weather to get weather information from Yahoo!
+     *
+     * @param l the l
+     */
     @SuppressLint("StaticFieldLeak")
     public void refreshWeather(String l) {
         this.location = l;
         new AsyncTask<String, Void, String>() {
+            /**
+             * gets JSON in background Thread
+             *
+             * @param strings
+             * @return
+             */
             @Override
             protected String doInBackground(String... strings) {
 
@@ -63,6 +110,9 @@ public class YahooWeatherService {
             }
 
 
+            /**
+             * @param s
+             */
             @Override
             protected void onPostExecute(String s) {
                 if (s == null && exception != null) {
@@ -96,7 +146,15 @@ public class YahooWeatherService {
     }
 
 
+    /**
+     * The type Location weather exception.
+     */
     public class LocationWeatherException extends Exception {
+        /**
+         * Instantiates a new Location weather exception.
+         *
+         * @param detailMessage the detail message
+         */
         LocationWeatherException(String detailMessage) {
             super(detailMessage);
         }
