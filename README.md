@@ -2,4 +2,4 @@
 Cat cat catch
 
 Buggy with SugarORM.
-Database would be placed to Firebase API.
+Database would be replaced to Firebase API.
